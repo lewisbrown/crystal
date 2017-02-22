@@ -23,10 +23,8 @@ module Crystal::Playground
         require "compiler/crystal/tools/playground/agent"
 
         class Crystal::Playground::Agent
-          @@instance = Crystal::Playground::Agent.new("ws://localhost:#{port}/agent/#{session_key}/#{tag}", #{tag})
-
           def self.instance
-            @@instance
+            @@instance ||= Crystal::Playground::Agent.new("ws://localhost:#{port}/agent/#{session_key}/#{tag}", #{tag})
           end
         end
 
