@@ -515,4 +515,22 @@ describe "Semantic: class var" do
       Foo.new.@never_nil
       )) { int32 }
   end
+
+  it "instance variables initializers can use class variables" do
+    assert_type(%(
+      class Foo
+        @@foo = 1
+
+        @never_nil = @@foo
+
+        def initialize
+          if false
+            @never_nil = 2
+          end
+        end
+      end
+
+      Foo.new.@never_nil
+      )) { int32 }
+  end
 end
